@@ -64,17 +64,23 @@ config.plugins.inHD.SecondInfobar = ConfigSelection(default="moreepg", choices =
 				("compact", _("Compact")),
 				("moreepg", _("More EPG"))
 				])
-config.plugins.inHD.ChannelSelection = ConfigSelection(default="right", choices = [
+config.plugins.inHD.Side = ConfigSelection(default="right", choices = [
 				("right", _("Right")),
-				("right-bigpicon", _("Right Big Picon")),
-				("right-nopicon", _("Right No Picon")),
-				("left", _("Left")),
-				("left-bigpicon", _("Left Big Picon")),
-				("left-nopicon", _("Left No Picon"))
+				("left", _("Left"))
+				])				
+config.plugins.inHD.Picon = ConfigSelection(default="Classic", choices = [
+				("bigpicon", _("Big Picon")),
+				("nopicon", _("No Picon")),
+				("classic", _("Classic"))
 				])				
 config.plugins.inHD.ChannelSelectionnext = ConfigSelection(default="no", choices = [
 				("yes", _("Yes")),
 				("no", _("No"))
+				])		
+config.plugins.inHD.Rows = ConfigSelection(default="14", choices = [
+				("14", _("14")),
+				("16", _("16")),
+				("19", _("19"))
 				])		
 config.plugins.inHD.EpgSelection = ConfigSelection(default="right", choices = [
 				("right", _("Right")),
@@ -145,7 +151,9 @@ class inHDsetup(ConfigListScreen, Screen):
 		list.append(getConfigListEntry(_("Infobar Footer:"), config.plugins.inHD.InfobarFooter))
 		list.append(getConfigListEntry(_("Second Infobar:"), config.plugins.inHD.SecondInfobar))
 		list.append(getConfigListEntry(_("Second Infobar Footer:"), config.plugins.inHD.SecondInfobarFooter))
-		list.append(getConfigListEntry(_("Channel Selection:"), config.plugins.inHD.ChannelSelection))
+		list.append(getConfigListEntry(_("Channel Side:"), config.plugins.inHD.Side))
+		list.append(getConfigListEntry(_("Channel Picon:"), config.plugins.inHD.Picon))
+		list.append(getConfigListEntry(_("Channel Rows:"), config.plugins.inHD.Rows))
 		list.append(getConfigListEntry(_("Show next events on channel selection screen:"), config.plugins.inHD.ChannelSelectionnext))
 		list.append(getConfigListEntry(_("EPG Selection:"), config.plugins.inHD.EpgSelection))
 		list.append(getConfigListEntry(_("Event View:"), config.plugins.inHD.Eventview))
@@ -221,17 +229,36 @@ class inHDsetup(ConfigListScreen, Screen):
 			for x in file_lines:
 				skin_lines.append(x)
 
-			skn_file = self.daten + "channel-"
+			skn_file = self.daten + "channel1-"
 			if config.plugins.inHD.ChannelSelectionnext.value=="yes":
-				skn_file = skn_file + config.plugins.inHD.ChannelSelection.value + ".xml"	
+				skn_file = skn_file + config.plugins.inHD.Side.value + "-" + config.plugins.inHD.Picon.value + ".xml"	
 			else:	
-				skn_file = skn_file + config.plugins.inHD.ChannelSelection.value + "-nonext.xml"
+				skn_file = skn_file + config.plugins.inHD.Side.value + "-" + config.plugins.inHD.Picon.value + "-nonext.xml"
+			skFile = open(skn_file, "r")
+			file_lines = skFile.readlines()
+			skFile.close()
+			for x in file_lines:
+				skin_lines.append(x)	
+
+			skn_file = self.daten + "rows-"
+			skn_file = skn_file + config.plugins.inHD.Side.value + "-" + config.plugins.inHD.Rows.value + ".xml"	
 			skFile = open(skn_file, "r")
 			file_lines = skFile.readlines()
 			skFile.close()
 			for x in file_lines:
 				skin_lines.append(x)	
 				
+			skn_file = self.daten + "channel2-"
+			if config.plugins.inHD.ChannelSelectionnext.value=="yes":
+				skn_file = skn_file + config.plugins.inHD.Side.value + "-" + config.plugins.inHD.Picon.value + ".xml"	
+			else:	
+				skn_file = skn_file + config.plugins.inHD.Side.value + "-" + config.plugins.inHD.Picon.value + "-nonext.xml"
+			skFile = open(skn_file, "r")
+			file_lines = skFile.readlines()
+			skFile.close()
+			for x in file_lines:
+				skin_lines.append(x)	
+
 			skn_file = self.daten + "epg-" + config.plugins.inHD.EpgSelection.value + ".xml"
 			skFile = open(skn_file, "r")
 			file_lines = skFile.readlines()
