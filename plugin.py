@@ -57,7 +57,7 @@ config.plugins.inHD.Infobar = ConfigSelection(default="classic", choices = [
 				("bigpicon", _("Big Picon")),
 				("bigpicon-classic", _("Big Picon Classic")),
 				("updown", _("Up Down")),
-				("nopicon-updown", _("Up Down No Picon"))		
+				("nopicon-updown", _("Up Down No Picon"))
 				])
 config.plugins.inHD.SecondInfobar = ConfigSelection(default="moreepg", choices = [
 				("classic", _("Classic")),
@@ -67,12 +67,12 @@ config.plugins.inHD.SecondInfobar = ConfigSelection(default="moreepg", choices =
 config.plugins.inHD.Side = ConfigSelection(default="right", choices = [
 				("right", _("Right")),
 				("left", _("Left"))
-				])				
-config.plugins.inHD.Picon = ConfigSelection(default="Classic", choices = [
+				])
+config.plugins.inHD.Picon = ConfigSelection(default="classic", choices = [
 				("bigpicon", _("Big Picon")),
 				("nopicon", _("No Picon")),
 				("classic", _("Classic"))
-				])				
+				])
 config.plugins.inHD.ChannelSelectionnext = ConfigSelection(default="no", choices = [
 				("yes", _("Yes")),
 				("no", _("No"))
@@ -81,7 +81,7 @@ config.plugins.inHD.Rows = ConfigSelection(default="14", choices = [
 				("14", _("14")),
 				("16", _("16")),
 				("19", _("19"))
-				])		
+				])
 config.plugins.inHD.EpgSelection = ConfigSelection(default="right", choices = [
 				("right", _("Right")),
 				("right-bigpicon", _("Right Big Picon")),
@@ -110,12 +110,14 @@ config.plugins.inHD.InfobarFooter = ConfigSelection(default="ctsig", choices = [
 				("etsig", _("ECM/Tuner/Signal")),
 				("satsig", _("Sat Info/Signal"))
 				])		
-config.plugins.inHD.SecondInfobarFooter = ConfigSelection(default="satsig", choices = [
+config.plugins.inHD.SecondInfobarFooter = ConfigSelection(default="satecmsig", choices = [
 				("ctsig", _("CAID/Tuner/Signal")),
 				("etsig", _("ECM/Tuner/Signal")),
-				("satsig", _("Sat Info/Signal"))
+				("satsig", _("Sat Info/Signal")),
+				("satecmsig", _("Sat Info/ECM/Signal"))
 				])		
-config.plugins.inHD.Font = ConfigSelection(default="ubuntu", choices = [
+config.plugins.inHD.Font = ConfigSelection(default="cool", choices = [
+        ("cool", _("Cool")),
         ("ubuntu", _("Ubuntu")),
         ("roboto", _("Roboto"))
         ])
@@ -228,7 +230,7 @@ class inHDsetup(ConfigListScreen, Screen):
 			skFile.close()
 			for x in file_lines:
 				skin_lines.append(x)
-
+				
 			skn_file = self.daten + "channel1-"
 			if config.plugins.inHD.ChannelSelectionnext.value=="yes":
 				skn_file = skn_file + config.plugins.inHD.Side.value + "-" + config.plugins.inHD.Picon.value + ".xml"	
@@ -239,7 +241,7 @@ class inHDsetup(ConfigListScreen, Screen):
 			skFile.close()
 			for x in file_lines:
 				skin_lines.append(x)	
-
+				
 			skn_file = self.daten + "rows-"
 			skn_file = skn_file + config.plugins.inHD.Side.value + "-" + config.plugins.inHD.Rows.value + ".xml"	
 			skFile = open(skn_file, "r")
@@ -258,7 +260,7 @@ class inHDsetup(ConfigListScreen, Screen):
 			skFile.close()
 			for x in file_lines:
 				skin_lines.append(x)	
-
+				
 			skn_file = self.daten + "epg-" + config.plugins.inHD.EpgSelection.value + ".xml"
 			skFile = open(skn_file, "r")
 			file_lines = skFile.readlines()
@@ -279,7 +281,7 @@ class inHDsetup(ConfigListScreen, Screen):
 			skFile.close()
 			for x in file_lines:
 				skin_lines.append(x)	
-
+				
 			base_file = self.daten + "skin-rest.xml"
 			skFile = open(base_file, "r")
 			file_lines = skFile.readlines()
@@ -306,4 +308,3 @@ class inHDsetup(ConfigListScreen, Screen):
 			x[1].cancel()
 		self.close()
 		
-
