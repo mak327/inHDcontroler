@@ -18,6 +18,7 @@
     <color name="dark" value="#00294a6b" />
     <color name="darkgrey" value="#00666666" />
     <color name="foreground" value="#00dddddd" />
+    <color name="fresh" value="#009fd00b" />
     <color name="green" value="#00389416" />
     <color name="grey" value="#00999999" />
     <color name="listback" value="#254f7497" />
@@ -55,6 +56,7 @@
     <color name="un777777" value="#00777777" />
     <color name="un800000" value="#00800000" />
     <color name="un80808" value="#00080808" />
+    <color name="un808080" value="#00808080" />
     <color name="un808888" value="#00808888" />
     <color name="un99ff" value="#000099ff" />
     <color name="un9f1313" value="#009f1313" />
